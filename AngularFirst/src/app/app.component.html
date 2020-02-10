@@ -1,0 +1,324 @@
+<div class="container-fluid">
+  <!-- NAV BAR -->
+  <div class="row badge-secondary" style="height: 55px; position: sticky; top:0; z-index:9999;">
+    <div class="col-3 text-light make-left beautify">
+      {{title}}
+    </div>
+    <div class="col-6"></div>
+      <div class="col-3 text-light btn" (click)="seeIt()">New Record</div>
+    
+  </div>
+  <!-- Input mine-->
+  <div class="row" *ngIf="isVisible" style="height: 100%;">
+
+    <!-- UNUSED SPACE-->
+    <div class="d-none col-md-1 d-md-block"></div>
+
+    <!-- AT CENTER OF SCREEN-->
+    <div class="col-12 col-md-10 alert-secondary rounded p-1">
+      <div class="card card-sm">
+        <div class="card-header h6 d-flex justify-content-between p-1">
+          <div> New Record</div>
+          <input [(ngModel)]="post.postDate" type="date" class="form-control mr-1 p-1" style="height: 20%;width: 20%;" required/>
+        </div>
+
+        <div class="card-body d-flex beautify-textarea bg-info p-0">
+          <table class="table table-borderless table-sm table-info mb-0">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Check Eligibility</th>
+                <th scope="col">Validate Transaction</th>
+                <th scope="col">Manage Loans Eligibilty</th>
+                <th scope="col">Calculate MLA</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Passed</th>
+                <td>  <input [(ngModel)]="post.checkEligibiltyPassed" type="text" class="form-control mr-1" placeholder="Passed Requests" required/>
+                </td>
+                <td>  <input [(ngModel)]="post.validateTransactionPassed" type="text" class="form-control mr-1" placeholder="Passed Requests" required/>
+                </td>
+                <td>  <input [(ngModel)]="post.manageLoansEligibilityPassed" type="text" class="form-control mr-1" placeholder="Passed Requests" required/>
+                </td>
+                <td>  <input [(ngModel)]="post.calculateMLAPassed" type="text" class="form-control mr-1" placeholder="Passed Requests" required/>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Failed</th>
+                
+                <td>  <input [(ngModel)]="post.checkEligibiltyFailed" type="text" class="form-control mr-1" placeholder="Passed Requests" required/>
+                </td>
+                <td>  <input [(ngModel)]="post.validateTransactionFailed" type="text" class="form-control mr-1" placeholder="Passed Requests" required/>
+                </td>
+                <td>  <input [(ngModel)]="post.manageLoansEligibilityFailed" type="text" class="form-control mr-1" placeholder="Passed Requests" required/>
+                </td>
+                <td>  <input [(ngModel)]="post.calculateMLAFailed" type="text" class="form-control mr-1" placeholder="Passed Requests" required/>
+                </td>
+                
+              </tr>
+              <tr>
+                <th scope="row">Total</th>
+               
+                <td>  <input [(ngModel)]="post.checkEligibiltyTotal" type="text" class="form-control mr-1" placeholder="Passed Requests" required/>
+                </td>
+                <td>  <input [(ngModel)]="post.validateTransactionTotal" type="text" class="form-control mr-1" placeholder="Passed Requests" required/>
+                </td>
+                <td>  <input [(ngModel)]="post.manageLoansEligibilityTotal" type="text" class="form-control mr-1" placeholder="Passed Requests" required/>
+                </td>
+                <td>  <input [(ngModel)]="post.calculateMLATotal" type="text" class="form-control mr-1" placeholder="Passed Requests" required/>
+                </td>
+                
+              </tr>
+            </tbody>
+          </table>
+          
+          
+        </div>
+
+        <div class="card-footer" >
+          <a href="#" (click)="postText()" class="badge badge-pill badge-primary d-flex justify-content-end" style="font-size: medium;width: 10%;">
+           Add Record
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- unsed space -->
+    <div class="d-none col-md-1 d-md-block"></div>
+  </div>
+
+  
+
+
+  <!-- MAIN SECTION CONTAINER-->
+  <div class="row mt-2">
+    
+    <div class="d-none col-md-1 d-md-block"></div>
+
+    <!-- PARENT SECTION FOR BLOCK-->
+    <div class="col-12 col-md-10" >
+        
+      <ng-container *ngFor="let item of postList; let itemIndex = index;">
+        <!-- TEXT CARD -->
+        <div class="table-dark beautify-textarea d-flex justify-content-between">
+          <span class="ml-3">{{item.postDate}}</span>
+          <span class="mr-3"><a href={{item.folderLink}}>Folder</a></span>
+
+        </div>
+        <table class="table table-borderless table-sm table-dark beautify-textarea">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Check Eligibility</th>
+              <th scope="col">Validate Transaction</th>
+              <th scope="col">Manage Loans Eligibilty</th>
+              <th scope="col">Calculate MLA</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bg-success" style="height: 2rem;">
+              <th scope="row">Passed</th>
+              <td> {{item.checkEligibiltyPassed}}</td>
+              <td>{{item.validateTransactionPassed}}</td>
+              <td>{{item.manageLoansEligibilityPassed}}</td>
+              <td>{{item.calculateMLAPassed}}</td>
+            </tr>
+            <tr class="bg-danger"  style="height: 2rem;">
+              <th scope="row">Failed</th>
+              <td> {{item.checkEligibiltyFailed}}</td>
+
+              <td>{{item.validateTransactionFailed}}</td>
+              <td>{{item.manageLoansEligibilityFailed}}</td>
+              <td>{{item.calculateMLAFailed}}</td>
+            </tr>
+            <tr class="bg-warning"  style="height: 2rem;">
+              <th scope="row">Total</th>
+              <td> {{item.checkEligibiltyTotal}}</td>
+              <td>{{item.validateTransactionTotal}}</td>
+              <td>{{item.manageLoansEligibilityTotal}}</td>
+              <td>{{item.calculateMLATotal}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+      <!--  <div class="row mt-2 beautify-post bg-secondary rounded" >
+          <div class="col-12">
+          <div class="row mt-1">
+            <div class="col-3 col-md-3 make-center bg-secondary" >
+             Date
+            </div>
+            <div class="col-3 col-md-3 make-center" >
+             Total
+            </div>
+            <div class="col-3 col-md-3 make-center" >
+              Passed
+            </div>
+            <div class="col-3 col-md-3 make-center" >
+              Failed
+            </div>
+          </div>
+          <div class="row">
+           <div class="col-3 col-md-3 make-center bg-secondary" >
+            {{item.postDate}}
+            </div>
+            <div class="col-3 col-md-3 make-center" >
+            {{item.postTotal}}
+            </div>
+            <div class="col-3 col-md-3 make-center" >
+            {{item.postPassed}}
+            </div>
+           <div class="col-3 col-md-3 make-center" >
+            {{item.postFailed}}
+           </div>
+           <div class="col-3 col-md-3 make-center" > 
+            <a href={{item.postLink}}>Link 1</a>
+           </div>
+          </div>
+        </div>
+        </div>-->
+
+        
+        
+    </ng-container>
+      <!-- Each Item Represents Individual Post Object -->
+      <!-- <ng-container *ngFor="let item of postList; let itemIndex = index;">
+          
+          <div *ngIf="item.postType == 'TEXT'" class="card mt-2" >
+              <div class="card-header h6">
+                CDAC - Text Block 
+              </div>
+
+             
+              <div class="card-body pb-0">
+                <div class="make-center beautify-post">
+                  {{item.postValue}}
+                </div>
+
+                <div class="d-flex justify-content-between ">
+                  <span class="text-muted badge-light rounded p-1" style="font-size: small;">
+                    <i class="fas fa-thumbs-up"></i> {{item.likeCount}} Abhishek and Others
+                  </span>
+                  <span class="text-muted badge-light rounded p-1" style="font-size: small;">
+                    {{item.subscribeCount}} Subscribe
+                  </span>
+                  <span class="text-muted badge-light rounded p-1" style="font-size: small;">
+                    {{item.commentList.length}} Comments
+                  </span>
+                </div>
+              </div>
+
+              <div class="card-footer d-flex justify-content-between pb-1">
+                <div>
+                    <a  (click)="likeCount(item)" class="text-light badge badge-pill badge-primary" style="cursor: pointer;">Like</a>
+                    <a  (click)="subscribeCount(item)" class=" text-light badge badge-pill badge-info ml-1" style="cursor:pointer">Subscribe</a>
+                    <a  (click)="addComment(item)" class="text-light badge badge-pill badge-success ml-1" style="cursor:pointer">Comment</a>
+                </div>
+                
+                <div>
+                    <a href="#" class="badge badge-pill badge-secondary">Update</a>
+                    <a (click)="deletePost(itemIndex)" style="cursor: pointer"  class="text-light badge badge-pill badge-danger ml-1">Delete</a>
+                </div>
+              </div>
+          </div>
+
+         
+          <div *ngIf="item.postType == 'IMAGE'" class="card mt-2" >
+              <div class="card-header h6">
+                CDAC - Image Block Reference
+              </div>
+
+              <div class="card-body pb-0">
+                <div class="make-center" style="height: 250px;">
+                  <img [src]="item.postValueMedia" alt="" style="height: 100%; width:100%; object-fit: contain;">
+                </div>
+
+                <div class="d-flex justify-content-between ">
+                    <span class="text-muted badge-light rounded p-1" style="font-size: small;">
+                      {{item.likeCount}} Abhishek and Others
+                    </span>
+                    <span class="text-muted badge-light rounded p-1" style="font-size: small;">
+                      {{item.subscribeCount}} Subscribe
+                    </span>
+                    <span class="text-muted badge-light rounded p-1" style="font-size: small;">
+                      {{item.commentList.length}} Comments
+                    </span>
+                </div>
+              </div>
+
+              <div class="card-footer d-flex justify-content-between pb-1">
+                  <div>
+                      <a  (click)="likeCount(item)" class="text-light badge badge-pill badge-primary" style="cursor: pointer;">Like</a>
+                      <a  (click)="subscribeCount(item)" class=" text-light badge badge-pill badge-info ml-1" style="cursor:pointer">Subscribe</a>
+                      <a  (click)="addComment(item)" class="text-light badge badge-pill badge-success ml-1" style="cursor:pointer">Comment</a>
+                  </div>
+                  
+                  <div>
+                      <a href="#" class="badge badge-pill badge-secondary">Update</a>
+                      <a (click)="deletePost(itemIndex)" style="cursor: pointer"  class="text-light badge badge-pill badge-danger ml-1">Delete</a>
+                  </div>
+              </div>
+          </div>
+
+          
+          <div *ngIf="item.postType == 'VIDEO'" class="card mt-2" >
+              <div class="card-header h6">
+                CDAC - VIDEO Block Reference
+              </div>
+
+              <div class="card-body pb-0">
+                <div class="make-center" style="height:250px;">
+                  <video style="height: 100%; width:100%;" controls>
+                    <source [src]="item.postValueMedia"/>
+                  </video>
+                </div>
+
+                <div class="d-flex justify-content-between ">
+                    <span class="text-muted badge-light rounded p-1" style="font-size: small;">
+                      {{item.likeCount}} Abhishek and Others
+                    </span>
+                    <span class="text-muted badge-light rounded p-1" style="font-size: small;">
+                      {{item.subscribeCount}} Subscribe
+                    </span>
+                    <span class="text-muted badge-light rounded p-1" style="font-size: small;">
+                      {{item.commentList.length}} Comments
+                    </span>
+                </div>
+              </div>
+
+              <div class="card-footer d-flex justify-content-between pb-1">
+                  <div>
+                      <a  (click)="likeCount(item)" class="text-light badge badge-pill badge-primary" style="cursor: pointer;">Like</a>
+                      <a  (click)="subscribeCount(item)" class=" text-light badge badge-pill badge-info ml-1" style="cursor:pointer">Subscribe</a>
+                      <a  (click)="addComment(item)" class="text-light badge badge-pill badge-success ml-1" style="cursor:pointer">Comment</a>
+                  </div>
+                  
+                  <div>
+                      <a href="#" class="badge badge-pill badge-secondary">Update</a>
+                      <a (click)="deletePost(itemIndex)" style="cursor: pointer"  class="text-light badge badge-pill badge-danger ml-1">Delete</a>
+                  </div>
+              </div>
+          </div>
+      </ng-container> -->
+        
+        <!-- NO POST AVAILABLE -->
+        <div class="card" *ngIf="postList.length === 0">
+            <div class="card-header">
+             
+            </div>
+
+            <div class="card-body make-center" style="height: 250px">
+                NO POST AVAILABLE
+            </div>
+
+            <div class="card-footer">
+              
+            </div>
+        </div>  
+    </div>  
+
+    <div class="d-none col-md-1 d-md-block"></div>
+  </div>
+
+</div>
